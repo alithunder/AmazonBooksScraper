@@ -6,16 +6,18 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+from amazoncaptcha import AmazonCaptcha
 #
 # first codes
 searchbarr = f" {input()}"
 options = webdriver.ChromeOptions()
-options.add_argument("--headless=new")
 options.add_experimental_option("detach", True)
 service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 driver.get("https://www.amazon.com/")
-time.sleep(10)
+captcha = AmazonCaptcha.fromdriver(driver)
+solution = captcha.solve()
+time.sleep(60)
 search = driver.find_element(By.ID, "twotabsearchtextbox")
 search.send_keys(searchbarr)
 search.send_keys(Keys.RETURN)
