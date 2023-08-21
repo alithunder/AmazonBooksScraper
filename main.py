@@ -10,6 +10,7 @@ from selenium import webdriver
 # first codes
 searchbarr = f" {input()}"
 options = webdriver.ChromeOptions()
+options.add_argument("--headless=new")
 options.add_experimental_option("detach", True)
 service = Service()
 driver = webdriver.Chrome(service=service, options=options)
